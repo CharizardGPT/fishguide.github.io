@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FishGuide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(178, 235, 242, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(178, 235, 242, 0.5) 0%, transparent 50%);
+            background-size: 100px 100px;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: rgba(52, 152, 219, 0.7);
+            color: white;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('/api/placeholder/1200/300');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 1rem;
+        }
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: -1px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .search-section {
+            text-align: center;
+            padding: 2rem;
+        }
+        .search-container {
+            display: inline-flex;
+            width: 60%;
+        }
+        .search-bar {
+            flex-grow: 1;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: none;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .search-btn, .upload-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .search-btn {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        .upload-btn {
+            background-color: #2ecc71;
+            margin-left: 1rem;
+            border-radius: 4px;
+        }
+        .fish-info {
+            display: flex;
+            justify-content: space-around;
+            padding: 2rem;
+        }
+        .fish-image, .fish-details {
+            width: 45%;
+        }
+        .fish-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .fish-details h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+        }
+        .fish-comparison {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .fish-comparison h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .comparison-table th {
+            background-color: #3498db;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .comparison-table img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/api/placeholder/80/80" alt="FishGuide Logo">
+            <h1>FishGuide</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#instructions">Instructions</a></li>
+                <li><a href="#history">History</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="search-section">
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search for fish...">
+            <button class="search-btn">Search</button>
+        </div>
+        <button class="upload-btn">Upload Fish Image</button>
+    </section>
+    
+    <section class="fish-info">
+        <div class="fish-image">
+            <img src="/api/placeholder/400/300" alt="Fish Image">
+        </div>
+        <div class="fish-details">
+            <h2>Fish Details</h2>
+            <p><strong>Name:</strong> Clownfish</p>
+            <p><strong>Size:</strong> 3-4 inches</p>
+            <p><strong>Type:</strong> Saltwater</p>
+            <p><strong>Gender:</strong> Hermaphroditic</p>
+            <p><strong>Aggressiveness:</strong> Low</p>
+            <p><strong>Longevity:</strong> 6-10 years</p>
+            <p><strong>Recommended Aquarium Size:</strong> 20+ gallons</p>
+        </div>
+    </section>
+
+    <section class="fish-comparison">
+        <h2>Fish Comparison</h2>
+        <table class="comparison-table">
+            <tr>
+                <th>Feature</th>
+                <th>Fish 1</th>
+                <th>Fish 2</th>
+            </tr>
+            <tr>
+                <td>Image</td>
+                <td><img src="/api/placeholder/150/150" alt="Clownfish"></td>
+                <td><img src="/api/placeholder/150/150" alt="Blue Tang"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Clownfish</td>
+                <td>Blue Tang</td>
+            </tr>
+            <tr>
+                <td>Size</td>
+                <td>3-4 inches</td>
+                <td>10-12 inches</td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>Saltwater</td>
+                <td>Saltwater</td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>Hermaphroditic</td>
+                <td>Male/Female</td>
+            </tr>
+            <tr>
+                <td>Aggressiveness</td>
+                <td>Low</td>
+                <td>Moderate</td>
+            </tr>
+            <tr>
+                <td>Longevity</td>
+                <td>6-10 years</td>
+                <td>8-20 years</td>
+            </tr>
+            <tr>
+                <td>Recommended Aquarium Size</td>
+                <td>20+ gallons</td>
+                <td>100+ gallons</td>
+            </tr>
+        </table>
+    </section>
+</body>
+</html>
